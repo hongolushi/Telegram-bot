@@ -768,6 +768,11 @@ async def protection_and_welcome(message: types.Message):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
+
+    # Delete any old webhook before polling. Telegram does not allow
+    # getUpdates (long polling) while a webhook is active.
+    await bot.delete_webhook(drop_pending_updates=True)
+
     task = asyncio.create_task(dp.start_polling(bot))
     try:
         yield
