@@ -1,2 +1,4 @@
-pyTelegramBotAPI
-Flask
+aiogram==3.22.0
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+aiosqlite==0.21.0
